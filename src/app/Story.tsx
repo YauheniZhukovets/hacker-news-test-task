@@ -52,8 +52,15 @@ export const Story: FC<StoryType> = memo(({ storyId, index }) => {
             description={`Author: ${story.by}`}
           />
           <div>
-            <span style={{ fontWeight: 'bold' }}> Rating</span>: {story.score}
-            <span style={{ fontWeight: 'bold' }}> Posted</span>: {mapTime(story.time)}
+            <div>
+              <span style={{ fontWeight: 'bold' }}> Posted</span>: {mapTime(story.time)}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}> Comments</span>: {story.descendants}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}> Rating</span>: {story.score}
+            </div>
           </div>
         </List.Item>
       ) : (

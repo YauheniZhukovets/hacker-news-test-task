@@ -1,17 +1,18 @@
 import React, { FC, useRef, useState } from 'react'
 
+import { ReloadOutlined } from '@ant-design/icons'
 import { Button, List, Space } from 'antd'
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import { useObserver } from '../hooks/useObserver'
 import { MAX_STORIES, STORY_INCREMENT } from '../shared/storyConst'
-import { fetchStoryIds } from '../store/thunk/storyThunk'
+import { fetchStoryIds } from '../store/thunk/storyThunks'
 import { StatusType } from '../type/Common'
 import { NullAnd } from '../type/NullAnd'
 
 import { Story } from './Story'
 
-export const Home: FC = () => {
+export const HomePage: FC = () => {
   const dispatch = useAppDispatch()
   const status = useAppSelector<StatusType>(state => state.app.status)
   const ids = useAppSelector<number[]>(state => state.story.ids)
@@ -38,7 +39,7 @@ export const Home: FC = () => {
       style={{ display: 'flex', margin: '0 auto', minWidth: '200px', maxWidth: '70%' }}
     >
       <Button disabled={status === 'loading'} onClick={refreshStoriesIds}>
-        Refresh
+        <ReloadOutlined />
       </Button>
 
       <List

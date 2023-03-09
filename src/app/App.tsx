@@ -9,7 +9,7 @@ import { AppRoutes } from '../component/AppRoutes'
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import { routes } from '../shared/routes'
 import { setError } from '../store/action/appAction'
-import { fetchStoryIds } from '../store/thunk/storyThunk'
+import { fetchStoryIds } from '../store/thunk/storyThunks'
 import { NullAnd } from '../type/NullAnd'
 
 const { Title } = Typography

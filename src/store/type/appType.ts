@@ -1,4 +1,4 @@
-import { setError, setStatus } from '../action/appAction'
+import { setError, setStatus } from '../action'
 
 export type SetStatusType = ReturnType<typeof setStatus>
 export type SetErrorType = ReturnType<typeof setError>

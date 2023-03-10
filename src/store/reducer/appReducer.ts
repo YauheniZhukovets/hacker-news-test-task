@@ -1,6 +1,6 @@
-import { StatusType } from '../../type/Common'
-import { NullAnd } from '../../type/NullAnd'
-import { ActionAppType } from '../type/appType'
+import { ActionAppType } from '../type'
+
+import { NullAnd, StatusType } from 'type'
 
 const initialState = {
   status: 'idle' as StatusType,

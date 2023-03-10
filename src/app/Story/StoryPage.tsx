@@ -1,19 +1,18 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, memo, useEffect } from 'react'
 
 import { LeftCircleOutlined } from '@ant-design/icons'
 import { Button, Descriptions, Space } from 'antd'
 import { unix } from 'moment'
 import { NavLink, useParams } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks'
-import { IStory } from '../models/IStory'
-import { routes } from '../shared/routes'
-import { setOneStory } from '../store/action/storyAction'
-import { fetchStory } from '../store/thunk/storyThunks'
+import { CommentsPage } from '../Comment'
 
-import { CommentsPage } from './Comment/CommentsPage'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { IStory } from 'models'
+import { routes } from 'shared'
+import { fetchStory, setOneStory } from 'store'
 
-export const StoryPage: FC = () => {
+export const StoryPage: FC = memo(() => {
   const dateFormat = 'DD-MM-YYYY'
   const { id } = useParams<{ id: string }>()
   const dispatch = useAppDispatch()
@@ -58,4 +57,4 @@ export const StoryPage: FC = () => {
       )}
     </Space>
   )
-}
+})

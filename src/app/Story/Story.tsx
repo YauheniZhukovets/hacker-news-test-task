@@ -4,8 +4,8 @@ import { UserOutlined } from '@ant-design/icons'
 import { Avatar, List, Spin } from 'antd'
 import { NavLink } from 'react-router-dom'
 
-import { IStory } from '../models/IStory'
-import { mapTime } from '../shared/mapTime'
+import { IStory } from 'models'
+import { mapTime } from 'shared'
 
 type StoryType = {
   story: IStory

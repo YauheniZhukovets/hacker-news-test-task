@@ -4,12 +4,12 @@ import { Layout, message, Typography } from 'antd'
 import { Content, Footer, Header } from 'antd/es/layout/layout'
 import { useNavigate } from 'react-router-dom'
 
-import { AppRoutes } from '../component/AppRoutes'
-import { useAppDispatch, useAppSelector } from '../hooks/hooks'
-import { routes } from '../shared/routes'
-import { setError } from '../store/action/appAction'
-import { fetchStories, fetchStoryIds } from '../store/thunk/storyThunks'
-import { NullAnd } from '../type/NullAnd'
+import { routes } from '../shared'
+
+import { AppRoutes } from 'component'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { fetchStories, fetchStoryIds, refreshComment, setError } from 'store'
+import { NullAnd } from 'type'
 
 const { Title } = Typography
 
@@ -37,6 +37,7 @@ export const App: FC = memo(() => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      dispatch(refreshComment())
       dispatch(fetchStoryIds())
     }, 60000)
 

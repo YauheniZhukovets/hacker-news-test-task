@@ -2,9 +2,8 @@ import React from 'react'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { HomePage } from '../app/HomePage'
-import { StoryPage } from '../app/StoryPage'
-import { routes } from '../shared/routes'
+import { HomePage, StoryPage } from 'app'
+import { routes } from 'shared'
 
 export const AppRoutes = () => {
   return (

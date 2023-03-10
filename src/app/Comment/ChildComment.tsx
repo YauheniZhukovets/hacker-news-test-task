@@ -1,20 +1,20 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 
 import { Avatar, List, Spin } from 'antd'
 import axios from 'axios'
 
-import { useAppDispatch } from '../../hooks/hooks'
-import { IComment } from '../../models/IComment'
-import { CommentService } from '../../service/CommentService'
-import { mapTime } from '../../shared/mapTime'
-import { setError, setStatus } from '../../store/action/appAction'
-import { NullAnd } from '../../type/NullAnd'
+import { useAppDispatch } from 'hooks'
+import { IComment } from 'models'
+import { CommentService } from 'service'
+import { mapTime } from 'shared'
+import { setError, setStatus } from 'store'
+import { NullAnd } from 'type'
 
 type ChildCommentType = {
   cId: number
 }
 
-export const ChildComment: FC<ChildCommentType> = ({ cId }) => {
+export const ChildComment: FC<ChildCommentType> = memo(({ cId }) => {
   const dispatch = useAppDispatch()
   const [comment, setComment] = useState<NullAnd<IComment>>(null)
 
@@ -55,4 +55,4 @@ export const ChildComment: FC<ChildCommentType> = ({ cId }) => {
       )}
     </div>
   )
-}
+})

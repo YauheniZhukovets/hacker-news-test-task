@@ -4,13 +4,12 @@ import { ReloadOutlined } from '@ant-design/icons'
 import { Button, List, message, Space, Typography } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
-import { IComment } from '../../models/IComment'
-import { refreshComment } from '../../store/action/commentAction'
-import { fetchComments } from '../../store/thunk/commentThunks'
-import { StatusType } from '../../type/Common'
-
 import { Comment } from './Comment'
+
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { IComment } from 'models'
+import { fetchComments, refreshComment } from 'store'
+import { StatusType } from 'type'
 
 const { Title } = Typography
 

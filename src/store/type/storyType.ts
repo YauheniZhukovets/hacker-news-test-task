@@ -1,4 +1,4 @@
-import { refreshStories, setOneStory, setStory, setStoryIds } from '../action/storyAction'
+import { refreshStories, setOneStory, setStory, setStoryIds } from '../action'
 
 export type SetStoryIdsType = ReturnType<typeof setStoryIds>
 export type SetStoryType = ReturnType<typeof setStory>

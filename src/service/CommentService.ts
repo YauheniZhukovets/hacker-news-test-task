@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios'
 
 import { api } from '../http'
-import { IComment } from '../models/IComment'
+
+import { IComment } from 'models'
 
 export class CommentService {
   static async fetchComment(cId: number): Promise<AxiosResponse<IComment>> {

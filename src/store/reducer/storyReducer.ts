@@ -1,5 +1,6 @@
-import { IStory } from '../../models/IStory'
-import { ActionStoryType } from '../type/storyType'
+import { ActionStoryType } from '../type'
+
+import { IStory } from 'models'
 
 const initialState = {
   ids: [] as number[],

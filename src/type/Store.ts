@@ -1,9 +1,6 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
-import { store } from '../store/store'
-import { ActionAppType } from '../store/type/appType'
-import { ActionCommentType } from '../store/type/commentType'
-import { ActionStoryType } from '../store/type/storyType'
+import { ActionAppType, ActionCommentType, ActionStoryType, store } from 'store'
 
 export type AppAction = ActionAppType | ActionStoryType | ActionCommentType
 

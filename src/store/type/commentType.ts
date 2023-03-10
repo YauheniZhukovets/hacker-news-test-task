@@ -1,4 +1,4 @@
-import { refreshComment, setComment } from '../action/commentAction'
+import { refreshComment, setComment } from '../action'
 
 export type SetCommentType = ReturnType<typeof setComment>
 export type refreshCommentType = ReturnType<typeof refreshComment>

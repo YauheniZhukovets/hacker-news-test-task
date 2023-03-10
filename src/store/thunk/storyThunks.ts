@@ -1,10 +1,17 @@
 import axios from 'axios'
 
-import { StoryService } from '../../service/StoryService'
-import { AppThunk } from '../../type/Store'
-import { setError, setStatus } from '../action/appAction'
-import { refreshComment } from '../action/commentAction'
-import { refreshStories, setOneStory, setStory, setStoryIds } from '../action/storyAction'
+import {
+  refreshComment,
+  refreshStories,
+  setError,
+  setOneStory,
+  setStatus,
+  setStory,
+  setStoryIds,
+} from '../action'
+
+import { StoryService } from 'service'
+import { AppThunk } from 'type'
 
 export const fetchStoryIds = (): AppThunk => async dispatch => {
   try {

@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import { CommentService } from '../../service/CommentService'
-import { AppThunk } from '../../type/Store'
-import { setError, setStatus } from '../action/appAction'
-import { setComment } from '../action/commentAction'
+import { setComment, setError, setStatus } from '../action'
+
+import { CommentService } from 'service'
+import { AppThunk } from 'type'
 
 export const fetchComments =
   (ids: number[]): AppThunk =>

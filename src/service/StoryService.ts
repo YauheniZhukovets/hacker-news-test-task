@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios'
 
 import { api } from '../http'
-import { IStory } from '../models/IStory'
+
+import { IStory } from 'models'
 
 export class StoryService {
   static async fetchStoriesIds(): Promise<AxiosResponse<number[]>> {

@@ -2,10 +2,10 @@ import React, { FC, memo, useState } from 'react'
 
 import { Avatar, List } from 'antd'
 
-import { IComment } from '../../models/IComment'
-import { mapTime } from '../../shared/mapTime'
-
 import { ChildComment } from './ChildComment'
+
+import { IComment } from 'models'
+import { mapTime } from 'shared'
 
 type CommentType = {
   comment: IComment

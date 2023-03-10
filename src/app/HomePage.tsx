@@ -3,12 +3,11 @@ import React, { FC, memo } from 'react'
 import { ReloadOutlined } from '@ant-design/icons'
 import { Button, List, Space } from 'antd'
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks'
-import { IStory } from '../models/IStory'
-import { refreshComment } from '../store/action/commentAction'
-import { fetchStoryIds } from '../store/thunk/storyThunks'
-
 import { Story } from './Story'
+
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { IStory } from 'models'
+import { fetchStoryIds, refreshComment } from 'store'
 
 export const HomePage: FC = memo(() => {
   const dispatch = useAppDispatch()

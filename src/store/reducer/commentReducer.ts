@@ -1,5 +1,6 @@
-import { IComment } from '../../models/IComment'
-import { ActionCommentType } from '../type/commentType'
+import { ActionCommentType } from '../type'
+
+import { IComment } from 'models'
 
 const initialState = {
   comments: [] as IComment[],

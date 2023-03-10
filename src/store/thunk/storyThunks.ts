@@ -3,11 +3,13 @@ import axios from 'axios'
 import { StoryService } from '../../service/StoryService'
 import { AppThunk } from '../../type/Store'
 import { setError, setStatus } from '../action/appAction'
-import { setStory, setStoryIds } from '../action/storyAction'
+import { refreshComment } from '../action/commentAction'
+import { refreshStories, setOneStory, setStory, setStoryIds } from '../action/storyAction'
 
 export const fetchStoryIds = (): AppThunk => async dispatch => {
   try {
     dispatch(setStatus('loading'))
+    dispatch(refreshStories())
     const res = await StoryService.fetchStoriesIds()
 
     dispatch(setStoryIds(res.data))
@@ -35,7 +37,7 @@ export const fetchStories = (): AppThunk => async (dispatch, getState) => {
 
   Promise.all(requests)
     .then(res => {
-      res.map(story => setStory(story.data))
+      res.map(story => dispatch(setStory(story.data)))
       dispatch(setStatus('succeeded'))
     })
     .catch(e => {
@@ -57,7 +59,8 @@ export const fetchStory =
       dispatch(setStatus('loading'))
       const res = await StoryService.fetchStory(Number(id))
 
-      dispatch(setStory(res.data))
+      dispatch(refreshComment())
+      dispatch(setOneStory(res.data))
       dispatch(setStatus('succeeded'))
     } catch (e) {
       if (axios.isAxiosError(e)) {

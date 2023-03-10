@@ -1,25 +1,27 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, memo, useEffect } from 'react'
 
-import { Layout, message, Spin, Typography } from 'antd'
+import { Layout, message, Typography } from 'antd'
 import { Content, Footer, Header } from 'antd/es/layout/layout'
 import { useNavigate } from 'react-router-dom'
-import { useDebounce } from 'usehooks-ts'
 
 import { AppRoutes } from '../component/AppRoutes'
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import { routes } from '../shared/routes'
 import { setError } from '../store/action/appAction'
-import { fetchStoryIds } from '../store/thunk/storyThunks'
+import { fetchStories, fetchStoryIds } from '../store/thunk/storyThunks'
 import { NullAnd } from '../type/NullAnd'
 
 const { Title } = Typography
 
-export const App: FC = () => {
+export const App: FC = memo(() => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const ids = useAppSelector<number[]>(state => state.story.ids)
-  const debouncedStoryIds = useDebounce<number[]>(ids, 60000)
   const error = useAppSelector<NullAnd<string>>(state => state.app.error)
+  const ids = useAppSelector<number[]>(state => state.story.ids)
+
+  useEffect(() => {
+    dispatch(fetchStoryIds())
+  }, [])
 
   useEffect(() => {
     if (error) {
@@ -34,19 +36,23 @@ export const App: FC = () => {
   }, [error])
 
   useEffect(() => {
-    dispatch(fetchStoryIds())
-  }, [debouncedStoryIds])
+    const interval = setInterval(() => {
+      dispatch(fetchStoryIds())
+    }, 60000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (ids.length) {
+      dispatch(fetchStories())
+    }
+  }, [ids])
 
   const onClickTitleHandler = () => {
     navigate(routes.HOME)
-  }
-
-  if (!ids.length) {
-    return (
-      <Spin tip="Loading...">
-        <div style={{ minHeight: '100vh' }}></div>
-      </Spin>
-    )
   }
 
   return (
@@ -68,4 +74,4 @@ export const App: FC = () => {
       </Footer>
     </Layout>
   )
-}
+})

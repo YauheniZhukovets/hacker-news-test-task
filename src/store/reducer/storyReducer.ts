@@ -9,18 +9,24 @@ const initialState = {
   startValue: 0,
 }
 
-export type InitialStateAppType = typeof initialState
+export type InitialStateStoryType = typeof initialState
 
 export const storyReducer = (
   state = initialState,
   action: ActionStoryType
-): InitialStateAppType => {
+): InitialStateStoryType => {
   switch (action.type) {
     case 'STORY/SET-STORY-IDS': {
       return { ...state, ids: action.ids }
     }
     case 'STORY/SET-STORY': {
       return { ...state, stories: [...state.stories, action.story] }
+    }
+    case 'STORY/SET-ONE-STORY': {
+      return { ...state, story: action.story }
+    }
+    case 'STORY/REFRESH': {
+      return { ...state, stories: [], ids: [] }
     }
     default:
       return state

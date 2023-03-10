@@ -8,8 +8,10 @@ import { NavLink, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import { IStory } from '../models/IStory'
 import { routes } from '../shared/routes'
-import { fetchComments } from '../store/thunk/commentThunks'
+import { setOneStory } from '../store/action/storyAction'
 import { fetchStory } from '../store/thunk/storyThunks'
+
+import { CommentsPage } from './Comment/CommentsPage'
 
 export const StoryPage: FC = () => {
   const dateFormat = 'DD-MM-YYYY'
@@ -18,16 +20,11 @@ export const StoryPage: FC = () => {
   const story = useAppSelector<IStory>(state => state.story.story)
 
   useEffect(() => {
+    dispatch(setOneStory({} as IStory))
     if (id) {
       dispatch(fetchStory(id))
     }
-  }, [id])
-
-  useEffect(() => {
-    if (story?.kids?.length) {
-      dispatch(fetchComments())
-    }
-  }, [story])
+  }, [])
 
   return (
     <Space
@@ -42,16 +39,22 @@ export const StoryPage: FC = () => {
       </NavLink>
 
       {story.id && (
-        <Descriptions title={story.title} layout="vertical">
-          <Descriptions.Item span={3} label="Link To News">
-            <a href={story.url} target="_blank" rel="noreferrer">
-              {story.url}
-            </a>
-          </Descriptions.Item>
-          <Descriptions.Item label="Date">{unix(story.time).format(dateFormat)}</Descriptions.Item>
-          <Descriptions.Item label="Author">{story.by}</Descriptions.Item>
-          <Descriptions.Item label="Comment Count">{story.descendants}</Descriptions.Item>
-        </Descriptions>
+        <>
+          <Descriptions title={story.title} layout="vertical">
+            <Descriptions.Item span={3} label="Link To News">
+              <a href={story.url} target="_blank" rel="noreferrer">
+                {story.url}
+              </a>
+            </Descriptions.Item>
+            <Descriptions.Item label="Date">
+              {unix(story.time).format(dateFormat)}
+            </Descriptions.Item>
+            <Descriptions.Item label="Author">{story.by}</Descriptions.Item>
+            <Descriptions.Item label="Comment Count">{story.descendants}</Descriptions.Item>
+          </Descriptions>
+
+          <CommentsPage sId={story.id} ids={story.kids ? story.kids : []} />
+        </>
       )}
     </Space>
   )

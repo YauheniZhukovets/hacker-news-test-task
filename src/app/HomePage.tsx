@@ -1,36 +1,23 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, memo } from 'react'
 
 import { ReloadOutlined } from '@ant-design/icons'
 import { Button, List, Space } from 'antd'
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
-import { useObserver } from '../hooks/useObserver'
-import { MAX_STORIES, STORY_INCREMENT } from '../shared/storyConst'
+import { IStory } from '../models/IStory'
+import { refreshComment } from '../store/action/commentAction'
 import { fetchStoryIds } from '../store/thunk/storyThunks'
-import { StatusType } from '../type/Common'
-import { NullAnd } from '../type/NullAnd'
 
 import { Story } from './Story'
 
-export const HomePage: FC = () => {
+export const HomePage: FC = memo(() => {
   const dispatch = useAppDispatch()
-  const status = useAppSelector<StatusType>(state => state.app.status)
-  const ids = useAppSelector<number[]>(state => state.story.ids)
-  const [count, setCount] = useState<number>(STORY_INCREMENT)
-  const lastElement = useRef<NullAnd<HTMLDivElement>>(null)
+  const stories = useAppSelector<IStory[]>(state => state.story.stories)
 
   const refreshStoriesIds = async () => {
-    await dispatch(fetchStoryIds())
-    setCount(0)
+    dispatch(fetchStoryIds())
+    dispatch(refreshComment())
   }
-
-  const fetchPortionStories = () => {
-    if (count < MAX_STORIES) {
-      setCount(count + STORY_INCREMENT)
-    }
-  }
-
-  useObserver(lastElement, fetchPortionStories)
 
   return (
     <Space
@@ -38,16 +25,15 @@ export const HomePage: FC = () => {
       size="middle"
       style={{ display: 'flex', margin: '0 auto', minWidth: '200px', maxWidth: '70%' }}
     >
-      <Button disabled={status === 'loading'} onClick={refreshStoriesIds}>
+      <Button loading={!stories.length} onClick={refreshStoriesIds}>
         <ReloadOutlined />
       </Button>
 
       <List
         itemLayout="horizontal"
-        dataSource={ids.slice(0, count)}
-        renderItem={(s, i) => <Story key={s} storyId={s} index={i} />}
+        dataSource={stories}
+        renderItem={(s, i) => <Story key={s.id} story={s} index={i} />}
       />
-      <div style={{ height: 10 }} ref={lastElement}></div>
     </Space>
   )
-}
+})

@@ -67,8 +67,8 @@ export const CommentsPage: FC<CommentsPageType> = memo(({ ids, sId }) => {
         <List
           itemLayout="vertical"
           style={{ width: '100%' }}
-          dataSource={comments}
-          renderItem={(item, i) => <Comment key={item.id} index={i} comment={item} />}
+          dataSource={comments.length ? comments : []}
+          renderItem={(item, i) => <Comment index={i} comment={item} />}
         />
 
         <TextArea

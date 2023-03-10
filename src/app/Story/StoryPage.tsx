@@ -10,7 +10,7 @@ import { CommentsPage } from '../Comment'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { IStory } from 'models'
 import { routes } from 'shared'
-import { fetchStory, setOneStory } from 'store'
+import { fetchStory, refreshComment, setOneStory } from 'store'
 
 export const StoryPage: FC = memo(() => {
   const dateFormat = 'DD-MM-YYYY'
@@ -20,6 +20,7 @@ export const StoryPage: FC = memo(() => {
 
   useEffect(() => {
     dispatch(setOneStory({} as IStory))
+    dispatch(refreshComment())
     if (id) {
       dispatch(fetchStory(id))
     }

@@ -30,8 +30,8 @@ export const HomePage: FC = memo(() => {
 
       <List
         itemLayout="horizontal"
-        dataSource={stories}
-        renderItem={(s, i) => <Story key={s.id} story={s} index={i} />}
+        dataSource={stories.length ? stories : []}
+        renderItem={(s, i) => <Story story={s} index={i} />}
       />
     </Space>
   )

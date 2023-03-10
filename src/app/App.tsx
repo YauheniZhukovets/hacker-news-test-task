@@ -8,7 +8,7 @@ import { routes } from '../shared'
 
 import { AppRoutes } from 'component'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { fetchStories, fetchStoryIds, refreshComment, setError } from 'store'
+import { fetchStories, fetchStoryIds, setError } from 'store'
 import { NullAnd } from 'type'
 
 const { Title } = Typography
@@ -37,7 +37,6 @@ export const App: FC = memo(() => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      dispatch(refreshComment())
       dispatch(fetchStoryIds())
     }, 60000)
 

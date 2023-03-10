@@ -53,6 +53,7 @@ export const ChildComment: FC<ChildCommentType> = memo(({ cId }) => {
           <Spin />
         </div>
       )}
+      {comment?.kids?.length ? comment.kids.map(id => <ChildComment key={id} cId={id} />) : <></>}
     </div>
   )
 })
